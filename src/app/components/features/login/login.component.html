@@ -1,0 +1,52 @@
+<p-toast position="top-center"></p-toast>
+
+<p-dialog header="Welcome Back" [visible]="visible" (visibleChange)="closeDialog($event)" [modal]="true"
+    [draggable]="false" [style]="{ width: '25rem' }">
+
+    <span class="dialog-subtitle">Sign in to your account to continue.</span>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+        <div class="form-fields">
+
+            <div class="form-group">
+                <label for="username" class="form-label">Username</label>
+                <input pInputText id="username" formControlName="username" class="full-width-input"
+                    [ngClass]="{ 'ng-invalid ng-dirty': isFieldInvalid('username') }" autocomplete="off" />
+
+                @if (isFieldInvalid('username')) {
+                <small class="error-message">Username is required.</small>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <p-password id="password" formControlName="password" [toggleMask]="true" [feedback]="false"
+                    styleClass="full-width-input" inputStyleClass="full-width-input"
+                    [ngClass]="{ 'ng-invalid ng-dirty': isFieldInvalid('password') }">
+                </p-password>
+
+                @if (isFieldInvalid('password')) {
+                <small class="error-message">Password is required.</small>
+                }
+            </div>
+
+        </div>
+
+        <div class="form-actions">
+            <p-button label="Sign In" type="submit" class="full-width-button"
+                styleClass="full-width-button" [disabled]="loginForm.invalid">
+            </p-button>
+
+            <p-divider align="center">
+                <span class="divider-text">OR</span>
+            </p-divider>
+
+            <div class="signup-prompt">
+                <span class="muted-text">Don't have an account? </span>
+                <a routerLink="/signup" (click)="forceClose()" class="signup-link">
+                    Sign up here
+                </a>
+            </div>
+        </div>
+    </form>
+</p-dialog>

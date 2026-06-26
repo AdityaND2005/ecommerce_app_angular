@@ -1,0 +1,133 @@
+.footer {
+    background-color: var(--p-surface-0);
+    border-top: 1px solid var(--p-surface-200);
+    color: var(--p-text-color);
+    font-size: 0.9rem;
+    margin-top: auto;
+    /* Pushes footer to bottom if container uses flex-column */
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+    gap: 3rem;
+}
+
+.footer-col h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: var(--p-text-color);
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-col ul li a {
+    color: var(--p-text-muted-color);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-col ul li a:hover {
+    color: var(--p-primary-color);
+}
+
+/* Brand Section specifics */
+.brand-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.footer-logo {
+    height: 28px;
+    /* Matches the sleek navbar scaling */
+    width: auto;
+    object-fit: contain;
+}
+
+.brand-desc {
+    color: var(--p-text-muted-color);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.social-links {
+    display: flex;
+    gap: 0.25rem;
+    margin-left: -0.5rem;
+    /* Aligns edge icon perfectly */
+}
+
+/* Newsletter specifics */
+.newsletter-col p {
+    color: var(--p-text-muted-color);
+    line-height: 1.5;
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+}
+
+.newsletter-input {
+    width: 100%;
+}
+
+/* Bottom Section formatting */
+.footer-bottom {
+    border-top: 1px solid var(--p-surface-200);
+    padding: 1.5rem 2rem;
+    background-color: var(--p-surface-50);
+}
+
+.bottom-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--p-text-muted-color);
+    font-size: 0.85rem;
+}
+
+.bottom-container p {
+    margin: 0;
+}
+
+.payment-icons {
+    display: flex;
+    gap: 1rem;
+    font-size: 1.3rem;
+}
+
+/* Responsive adjustments for Tablets and Mobile */
+@media (max-width: 1024px) {
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 3rem 1.5rem;
+    }
+
+    .bottom-container {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+}

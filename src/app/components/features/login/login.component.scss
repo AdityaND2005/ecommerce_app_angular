@@ -1,0 +1,77 @@
+.dialog-subtitle {
+    display: block;
+    color: var(--p-text-muted-color);
+    margin-bottom: 1.5rem;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; 
+}
+
+.form-label {
+    font-weight: 600;
+}
+
+.full-width-input {
+    width: 100%;
+}
+
+::ng-deep .full-width-input.p-password,
+::ng-deep .full-width-input .p-password-input,
+::ng-deep .full-width-button,
+::ng-deep .full-width-button .p-button {
+    width: 100%;
+}
+
+.error-message {
+    color: #ef4444; 
+    font-size: 0.875rem;
+}
+
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.divider-text {
+    color: var(--p-text-muted-color);
+    font-size: 0.875rem;
+}
+
+.signup-prompt {
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.muted-text {
+    color: var(--p-text-muted-color);
+    font-size: 0.875rem;
+}
+
+.signup-link {
+    font-weight: 500;
+    color: var(--p-primary-color);
+    text-decoration: none;
+    cursor: pointer;
+    transition: text-decoration 0.2s ease;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}

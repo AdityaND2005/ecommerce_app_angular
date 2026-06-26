@@ -1,0 +1,42 @@
+<app-login [(visible)]="showLoginDialog"></app-login>
+
+<div class="nav-container" >
+    <p-menubar [model]="navItems()">
+
+        <ng-template pTemplate="start">
+            <div class="logo-container">
+                <img src="/logo.png" alt="Store Logo" class="logo-image" />
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="end">
+            <div class="actions-container">
+
+                <p-inputgroup class="p-input-icon-left">
+                    <p-inputgroup-addon>
+                        <i class="pi pi-search"></i>
+                    </p-inputgroup-addon>
+                    <input type="text" pInputText placeholder="Search" class="search-input" />
+                </p-inputgroup>
+
+                <p-button [icon]="isDarkMode() ? 'pi pi-sun' : 'pi pi-moon'" [rounded]="true" [text]="true"
+                    severity="secondary" (click)="toggleTheme()" aria-label="Toggle Dark Mode">
+                </p-button>
+                
+                @if (!isLoggedIn()) {
+                <p-button label="Login" icon="pi pi-sign-in" size="small" (click)="openLogin()" />
+                } @else {
+                <div class="user-profile" (click)="userMenu.toggle($event)">
+                    <i class="pi pi-bars hamburger-icon"></i>
+                    <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+                        shape="circle">
+                    </p-avatar>
+                </div>
+
+                <p-menu #userMenu [model]="userMenuItems()" [popup]="true"></p-menu>
+                }
+            </div>
+        </ng-template>
+
+    </p-menubar>
+</div>
