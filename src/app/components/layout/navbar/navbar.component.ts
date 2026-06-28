@@ -13,6 +13,7 @@ import { DOCUMENT } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from '../../features/login/login.component';
 import { AuthService } from '../../../services/auth.service';
+import { ProductService } from '../../../services/product.service';
 
 @Component({
   selector: 'app-navbar',
@@ -26,40 +27,48 @@ import { AuthService } from '../../../services/auth.service';
 export class NavbarComponent implements OnInit {
   private document = inject(DOCUMENT);
   private authService = inject(AuthService);
+  private productService = inject(ProductService);
   isLoggedIn = this.authService.isLoggedIn$;
   isDarkMode = signal<boolean>(false);
   navItems = signal<MenuItem[]>([]);
   userMenuItems = signal<MenuItem[]>([]);
   showLoginDialog: boolean = false;
+  categories!: string[];
 
   ngOnInit() {
-    this.navItems.set([
-      {
-        label: 'Home',
-        routerLink:['/home']
-      },
-      {
-        label: 'Categories',
-        badge: '3',
-        items: [
-          { label: 'Active Projects', icon: 'pi pi-bolt' },
-          { label: 'Archived', icon: 'pi pi-box' }
-        ]
-      }
-    ]);
+    this.productService.getCategories().subscribe((res) => {
+      this.categories = res;
+      this.navItems.set([
+        {
+          label: 'Home',
+          routerLink: ['/home']
+        },
+        {
+          label: 'Categories',
+          badge: res.length.toString(),
+          items: res.map(category => ({
+            label: category.replace(
+              /\w\S*/g,
+              word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+            ),
+            routerLink: ['/category', this.productService.generateSlug(category)]
+          }))
+        }
+      ]);
+    })
 
     this.userMenuItems.set([
       {
         label: 'Profile',
         icon: 'pi pi-user',
-        routerLink:['/profile']
+        routerLink: ['/profile']
       },
       { separator: true },
       {
         label: 'Cart',
         icon: 'pi pi-shopping-cart',
         badge: '2',
-        routerLink:['/cart']
+        routerLink: ['/cart']
       },
       { separator: true },
       {
