@@ -1,0 +1,37 @@
+<div class="carousel-section">
+
+    <div class="category-header">
+        <h2 class="category-title">{{ formattedCategoryName() }}</h2>
+        <div class="title-divider"></div>
+    </div>
+
+    <p-carousel [value]="products" [numVisible]="4" [numScroll]="1" [responsiveOptions]="responsiveOptions"
+        [circular]="true" [autoplayInterval]="5000">
+
+        <ng-template let-product pTemplate="item">
+            <div class="product-card">
+
+                <div class="image-wrapper">
+                    <img [src]="product.image" [alt]="product.title" class="product-image" />
+                </div>
+
+                <div class="product-details">
+                    <h3 class="product-title" [title]="product.title">{{ product.title }}</h3>
+
+                    <div class="product-meta">
+                        <span class="product-price">${{ product.price | number:'1.2-2' }}</span>
+                        <span class="product-rating">
+                            <i class="pi pi-star-fill star-icon"></i>
+                            {{ product.rating.rate }} ({{ product.rating.count }})
+                        </span>
+                    </div>
+
+                    <p-button label="View Product" icon="pi pi-search" styleClass="view-btn p-button-outlined">
+                    </p-button>
+                </div>
+
+            </div>
+        </ng-template>
+
+    </p-carousel>
+</div>

@@ -6,5 +6,8 @@
 
     <section class="placeholder-section">
     </section>
-
+    @for (category of productMap | keyvalue; track category.key) {
+    <app-product-carousel [categoryName]="category.key" [products]="category.value">
+    </app-product-carousel>
+    }
 </div>

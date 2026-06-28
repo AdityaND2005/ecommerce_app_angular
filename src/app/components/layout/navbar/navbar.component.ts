@@ -35,6 +35,7 @@ export class NavbarComponent implements OnInit {
   showLoginDialog: boolean = false;
   categories!: string[];
 
+
   ngOnInit() {
     this.productService.getCategories().subscribe((res) => {
       this.categories = res;

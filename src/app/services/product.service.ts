@@ -35,6 +35,7 @@ export class ProductService {
   getCategories() {
     return this.http.get<string[]>(`${API_URL}products/categories`);
   }
+  
   getProductsGroupedByCategory() {
     return this.getProducts().pipe(
       map(products => {
@@ -52,8 +53,8 @@ export class ProductService {
   generateSlug(text: string): string {
     return text
       .toLowerCase()
-      .replace(/'/g, '')             // Removes apostrophes entirely (e.g., men's -> mens)
-      .replace(/[^a-z0-9]+/g, '-')   // Replaces any non-alphanumeric character sequences with a single hyphen
-      .replace(/^-+|-+$/g, '');      // Trims hyphens from the very beginning or end of the string
+      .replace(/'/g, '')             
+      .replace(/[^a-z0-9]+/g, '-')   
+      .replace(/^-+|-+$/g, '');      
   }
 }
