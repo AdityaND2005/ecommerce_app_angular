@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { API_URL } from '../constants';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +42,9 @@ export class AuthService {
     localStorage.clear();
     this.token.set('');
     this.router.navigate(['/'])
+  }
+
+  getUserId() {
+    return jwtDecode(this.token())?.sub ?? null;
   }
 }

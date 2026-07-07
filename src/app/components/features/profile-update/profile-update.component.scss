@@ -1,0 +1,137 @@
+.profile-wrapper {
+  display: flex;
+  align-items: flex-start; // Better for longer forms than center
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  padding: 3rem 1rem;
+  transition: background-color 0.3s ease;
+}
+
+::ng-deep .profile-card {
+  width: 100%;
+  max-width: 700px; // Slightly wider than signup to accommodate more fields
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: none;
+  
+  .p-card-body {
+    padding: 2.5rem;
+  }
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: var(--p-text-color, #333333); 
+  }
+
+  p {
+    margin: 0;
+    color: var(--p-text-muted-color, #6c757d); 
+  }
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 0;
+  color: var(--p-text-muted-color, #6c757d);
+  
+  p {
+    margin-top: 1rem;
+    font-weight: 500;
+  }
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+// Layout Utility Classes
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.25rem;
+
+  input {
+    width: 100%;
+  }
+}
+
+.section-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1rem 0;
+  
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--p-content-border-color, #e5e7eb);
+  }
+  
+  span {
+    padding: 0 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--p-text-muted-color, #6c757d);
+  }
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+
+  ::ng-deep .save-btn {
+    width: 100%;
+    
+    @media (min-width: 768px) {
+      width: auto; // Only spans full width on mobile
+      min-width: 200px;
+    }
+  }
+}
+
+
+:host-context(.dark) {
+  
+  .profile-wrapper {
+    background: linear-gradient(135deg, #121212 0%, #1a1b1e 100%);
+  }
+
+  ::ng-deep .profile-card {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  .section-divider {
+    &::before,
+    &::after {
+      border-bottom-color: #374151; 
+    }
+  }
+}

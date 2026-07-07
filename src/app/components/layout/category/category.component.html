@@ -1,1 +1,62 @@
-<p> {{categoryName}} category works!</p>
+<div class="category-wrapper">
+
+  <div class="category-header">
+    <h1 class="category-title">{{ formattedCategoryName }}</h1>
+    <div class="title-divider"></div>
+  </div>
+
+  @if (categoryProducts$ | async; as categoryProducts) {
+
+    @if (categoryProducts.length > 0) {
+
+      <div class="product-grid">
+
+        @for (product of categoryProducts; track product.id) {
+
+          <div class="product-card" (click)="goToProduct(product.id)">
+
+            <div class="image-wrapper">
+              <img [src]="product.image" [alt]="product.title" class="product-image" />
+            </div>
+
+            <div class="product-details">
+              <h3 class="product-title">{{ product.title }}</h3>
+
+              <div class="product-meta">
+                <span class="product-price">
+                  ${{ product.price | number:'1.2-2' }}
+                </span>
+
+                <span class="product-rating">
+                  <i class="pi pi-star-fill star-icon"></i>
+                  {{ product.rating.rate }} ({{ product.rating.count }})
+                </span>
+              </div>
+
+              <p-button
+                label="View Details"
+                icon="pi pi-eye"
+                styleClass="view-btn p-button-outlined"
+                (onClick)="$event.stopPropagation(); goToProduct(product.id)">
+              </p-button>
+
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+    } @else {
+
+      <div class="empty-state">
+        <i class="pi pi-box" style="font-size: 3rem"></i>
+        <p>No products found in this category.</p>
+      </div>
+
+    }
+
+  }
+
+</div>

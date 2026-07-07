@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/layout/home/home.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -17,18 +18,24 @@ export const routes: Routes = [
     },
     {
         path: 'cart',
-        loadComponent: () => import("./components/features/cart/cart.component").then((m) => m.CartComponent)
+        loadComponent: () => import("./components/features/cart/cart.component").then((m) => m.CartComponent),
+        canActivate:[authGuard]
     },
     {
         path: 'profile',
-        loadComponent: () => import("./components/features/cart/cart.component").then((m) => m.CartComponent)
+        loadComponent: () => import("./components/features/profile-update/profile-update.component").then((m) => m.ProfileUpdateComponent),
+        canActivate:[authGuard]
     },
     {
         path: 'category/:name',
         loadComponent: () => import('./components/layout/category/category.component').then(m => m.CategoryComponent)
     },
     {
+        path: 'product/:id',
+        loadComponent: () => import('./components/features/product/product.component').then(m => m.ProductComponent)
+    },
+    {
         path: '**',
-        redirectTo: ''
+        redirectTo: '/home'
     }
 ];

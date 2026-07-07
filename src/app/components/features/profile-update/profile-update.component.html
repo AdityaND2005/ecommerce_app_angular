@@ -1,0 +1,103 @@
+<p-toast key="profile-update" position="top-right"></p-toast>
+
+<div class="profile-wrapper">
+    <p-card class="profile-card">
+
+        <div class="form-header">
+            <h1>Update Profile</h1>
+            <p>Manage your personal information</p>
+        </div>
+
+        <form [formGroup]="profileForm" class="profile-form">
+
+            <div class="form-row">
+                <div class="form-group">
+                    <p-floatLabel>
+                        <input pInputText id="firstname" formControlName="firstname" />
+                        <label for="firstname">First Name</label>
+                    </p-floatLabel>
+                    <small class="p-error" *ngIf="f['firstname'].invalid && f['firstname'].touched">
+                        First name is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <p-floatLabel>
+                        <input pInputText id="lastname" formControlName="lastname" />
+                        <label for="lastname">Last Name</label>
+                    </p-floatLabel>
+                    <small class="p-error" *ngIf="f['lastname'].invalid && f['lastname'].touched">
+                        Last name is required.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <p-floatLabel>
+                        <input pInputText id="email" type="email" formControlName="email" />
+                        <label for="email">Email Address</label>
+                    </p-floatLabel>
+                    <small class="p-error" *ngIf="f['email'].invalid && f['email'].touched">
+                        Valid email is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <p-floatLabel>
+                        <input pInputText id="phone" formControlName="phone" />
+                        <label for="phone">Phone Number</label>
+                    </p-floatLabel>
+                    <small class="p-error" *ngIf="f['phone'].invalid && f['phone'].touched">
+                        Phone number is required.
+                    </small>
+                </div>
+            </div>
+
+            <div class="section-divider">
+                <span>Address Details</span>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <p-floatLabel>
+                        <input pInputText id="street" formControlName="street" />
+                        <label for="street">Street Name</label>
+                    </p-floatLabel>
+                    <small class="p-error" *ngIf="f['street'].invalid && f['street'].touched">
+                        Street is required.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <p-floatLabel>
+                        <input pInputText id="city" formControlName="city" />
+                        <label for="city">City</label>
+                    </p-floatLabel>
+                    <small class="p-error" *ngIf="f['city'].invalid && f['city'].touched">
+                        City is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <p-floatLabel>
+                        <input pInputText id="zipcode" formControlName="zipcode" />
+                        <label for="zipcode">Zip Code</label>
+                    </p-floatLabel>
+                    <small class="p-error" *ngIf="f['zipcode'].invalid && f['zipcode'].touched">
+                        Zip code is required.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <p-button label="Save Changes" icon="pi pi-check" type="button" (click)="onSubmit()"
+                    styleClass="save-btn" [disabled]="profileForm.invalid">
+                </p-button>
+            </div>
+
+        </form>
+    </p-card>
+</div>
