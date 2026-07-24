@@ -45,6 +45,6 @@ export class AuthService {
   }
 
   getUserId() {
-    return jwtDecode(this.token())?.sub ?? null;
+    return jwtDecode(this.token())?.sub ?? undefined;
   }
 }

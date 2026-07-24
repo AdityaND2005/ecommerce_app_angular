@@ -44,7 +44,8 @@
             label="Add to Cart" 
             icon="pi pi-shopping-cart" 
             styleClass="cart-btn" 
-            size="large">
+            size="large"
+            (onClick)="cartService.addItem(p)">
           </p-button>
           <p-button 
             icon="pi pi-heart" 

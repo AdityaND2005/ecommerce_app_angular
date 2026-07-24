@@ -8,7 +8,7 @@ import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-category',
   standalone: true,
-  imports: [CommonModule, ButtonModule,AsyncPipe],
+  imports: [CommonModule, ButtonModule, AsyncPipe],
   templateUrl: './category.component.html',
   styleUrl: './category.component.scss'
 })

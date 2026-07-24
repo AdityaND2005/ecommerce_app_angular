@@ -68,7 +68,6 @@ export class NavbarComponent implements OnInit {
       {
         label: 'Cart',
         icon: 'pi pi-shopping-cart',
-        badge: '2',
         routerLink: ['/cart']
       },
       { separator: true },

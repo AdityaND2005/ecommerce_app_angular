@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { Product } from '../../../services/product.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,6 +16,7 @@ import { Product } from '../../../services/product.service';
 export class ProductCarouselComponent {
   @Input({ required: true }) categoryName!: string;
   @Input({ required: true }) products: Product[] = [];
+  private router = inject(Router);
 
   responsiveOptions = [
     { breakpoint: '1400px', numVisible: 3, numScroll: 1 },
@@ -28,5 +30,9 @@ export class ProductCarouselComponent {
       .split('-')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
+  }
+
+  goToProduct(productId: number) {
+    this.router.navigate(['/product', productId]);
   }
 }

@@ -5,6 +5,7 @@ import { switchMap } from 'rxjs';
 import { CommonModule, Location } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
+import { CartService } from '../../../services/cart.service';
 
 @Component({
   selector: 'app-product',
@@ -15,8 +16,8 @@ import { TagModule } from 'primeng/tag';
 })
 export class ProductComponent {
   private activatedRoute = inject(ActivatedRoute);
-  private router = inject(Router);
   private productService = inject(ProductService);
+  cartService = inject(CartService);
   product = this.activatedRoute.paramMap.pipe(
     switchMap(params => {
       const id = Number(params.get('id'));

@@ -51,7 +51,7 @@ export class SignupComponent {
     const formValues = this.signupForm.value;
 
     this.authService.signup(formValues).subscribe({
-      next: (res) => {
+      next: () => {
         this.messageService.add({
           severity: 'success',
           summary: 'Account Created',
@@ -63,7 +63,7 @@ export class SignupComponent {
           this.router.navigate(['/'])
         },1000);
       },
-      error: (err) => {
+      error: () => {
         this.messageService.add({
           severity: 'error',
           summary: 'Signup Failed',

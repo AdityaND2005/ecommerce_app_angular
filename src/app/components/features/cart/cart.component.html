@@ -1,1 +1,70 @@
-<p>cart works!</p>
+<div class="cart-container">
+    <h2>Shopping Cart</h2>
+
+    <ng-container *ngIf="cartService.cart().products?.length; else emptyCart">
+
+        <p-table [value]="cartService.cart().products!" styleClass="p-datatable-striped">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th class="actions-header">Actions</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-item>
+                <tr>
+                    <td>
+                        <img [src]="item.image" [alt]="item.title" class="product-image" />
+                    </td>
+                    <td>{{ item.title || 'Product ' + item.id }}</td>
+                    <td>{{ item.price | currency }}</td>
+                    <td>
+                        <div class="quantity-controls">
+                            <p-button icon="pi pi-minus" [rounded]="true" [text]="true" severity="secondary"
+                                (onClick)="cartService.removeItem(item.id)">
+                            </p-button>
+
+                            <span class="count">{{ item.count }}</span>
+
+                            <p-button icon="pi pi-plus" [rounded]="true" [text]="true" severity="secondary"
+                                (onClick)="cartService.addItem(item)">
+                            </p-button>
+                        </div>
+                    </td>
+                    <td class="item-total">{{ (item.price * item.count) | currency }}</td>
+                    <td>
+                        <p-button icon="pi pi-trash" severity="danger" [outlined]="true"
+                            (onClick)="cartService.deleteItem(item.id)" ariaLabel="Remove item">
+                        </p-button>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="summary">
+                <div class="cart-summary">
+                    Total: <span class="total-price">{{ cartService.totalPrice() | currency }}</span>
+                </div>
+            </ng-template>
+        </p-table>
+
+        <div class="checkout-section">
+            <p-button label="Proceed to Checkout" icon="pi pi-check" size="large"></p-button>
+        </div>
+
+    </ng-container>
+
+    <ng-template #emptyCart>
+        <div class="empty-state">
+            <i class="pi pi-shopping-cart empty-icon"></i>
+            <h3>Your cart is empty</h3>
+            <p>Looks like you haven't added anything yet.</p>
+            <p-button label="Continue Shopping" icon="pi pi-arrow-left" [outlined]="true"
+                (onClick)="goBack()"></p-button>
+        </div>
+    </ng-template>
+
+</div>
