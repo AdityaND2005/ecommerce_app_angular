@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from '../../../services/product.service';
+import { Product, ProductService } from '../../../services/product.service';
 import { switchMap } from 'rxjs';
 import { CommonModule, Location } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { CartService } from '../../../services/cart.service';
+import { WishlistService } from '../../../services/wishlist.service';
 
 @Component({
   selector: 'app-product',
@@ -17,7 +18,10 @@ import { CartService } from '../../../services/cart.service';
 export class ProductComponent {
   private activatedRoute = inject(ActivatedRoute);
   private productService = inject(ProductService);
+  wishlistService = inject(WishlistService);
+  private router = inject(Router);
   cartService = inject(CartService);
+
   product = this.activatedRoute.paramMap.pipe(
     switchMap(params => {
       const id = Number(params.get('id'));
@@ -26,6 +30,17 @@ export class ProductComponent {
   );
 
   constructor(private location: Location) { }
+
+  cartBtn(p: Product) {
+    this.cartService.addItem(p);
+    this.router.navigate(['/cart'])
+  }
+
+  wishBtn(p: Product) {
+    const isPresent = this.wishlistService.isPresent(p);
+    isPresent ? this.wishlistService.deleteItem(p.id) : this.wishlistService.addItem(p);
+    console.log(this.wishlistService.wishlist());
+  }
 
   goBack() {
     this.location.back();

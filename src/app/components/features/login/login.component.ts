@@ -58,13 +58,13 @@ export class LoginComponent {
       next: (response: any) => {
         localStorage.setItem('token', response.token);
         this.authService.token.set(response.token);
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Logged in successfully!' });
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Logged in successfully!', key:"login" });
         setTimeout(() => {
           this.forceClose();
         }, 500);
       },
       error: (err) => {
-        this.messageService.add({ severity: 'error', summary: 'Login Failed', detail: 'Invalid username or password.' });
+        this.messageService.add({ severity: 'error', summary: 'Login Failed', detail: 'Invalid username or password.', key:"login" });
       }
     });
   }

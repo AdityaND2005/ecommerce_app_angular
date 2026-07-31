@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { InputMaskModule } from 'primeng/inputmask';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -20,7 +21,8 @@ import { AuthService } from '../../../services/auth.service';
     InputTextModule,
     ButtonModule,
     FloatLabelModule,
-    ToastModule
+    ToastModule,
+    InputMaskModule
   ],
   templateUrl: './profile-update.component.html',
   styleUrl: './profile-update.component.scss'
@@ -63,6 +65,10 @@ export class ProfileUpdateComponent implements OnInit {
           city: user.address.city,
           street: user.address.street,
           zipcode: user.address.zipcode
+        });
+        
+        setTimeout(() => {
+          this.profileForm.get('phone')?.setValue(user.phone);
         });
       }
     })

@@ -3,7 +3,7 @@ import { Product } from './product.service';
 
 export interface Wishlist {
   userId?: string;
-  products?: Product[]
+  products: Product[]
 }
 
 @Injectable({
@@ -11,11 +11,13 @@ export interface Wishlist {
 })
 export class WishlistService {
 
-  wishlist = signal<Wishlist>({});
+  wishlist = signal<Wishlist>({
+    products: []
+  });
 
   addItem(product: Product) {
     this.wishlist.update(wishlist => {
-      const products = wishlist.products ?? [];
+      const products = wishlist.products;
       const updatedProducts = products.find(item => item.id === product.id) ? products : [...products, product];
       return {
         ...wishlist,
@@ -27,7 +29,7 @@ export class WishlistService {
   
   deleteItem(id: number) {
     this.wishlist.update(wishlist => {
-      const products = wishlist.products ?? [];
+      const products = wishlist.products;
       const updatedProducts = products.filter(item => item.id !== id);
       return {
         ...wishlist,
@@ -35,5 +37,9 @@ export class WishlistService {
       };
     });
     localStorage.setItem('wishlist', JSON.stringify(this.wishlist()))
+  }
+
+  isPresent(p: Product) {
+    return this.wishlist().products.some((prod) => prod.id === p.id);
   }
 }

@@ -66,6 +66,12 @@ export class NavbarComponent implements OnInit {
       },
       { separator: true },
       {
+        label: 'Wishlist',
+        icon: 'pi pi-list-check',
+        routerLink: ['/wishlist']
+      },
+      { separator: true },
+      {
         label: 'Cart',
         icon: 'pi pi-shopping-cart',
         routerLink: ['/cart']

@@ -22,6 +22,11 @@ export const routes: Routes = [
         canActivate:[authGuard]
     },
     {
+        path: 'wishlist',
+        loadComponent: () => import("./components/features/wishlist/wishlist.component").then((m) => m.WishlistComponent),
+        canActivate:[authGuard]
+    },
+    {
         path: 'profile',
         loadComponent: () => import("./components/features/profile-update/profile-update.component").then((m) => m.ProfileUpdateComponent),
         canActivate:[authGuard]

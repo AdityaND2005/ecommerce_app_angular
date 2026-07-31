@@ -45,7 +45,7 @@
 
                 <div class="form-group">
                     <p-floatLabel>
-                        <input pInputText id="phone" formControlName="phone" />
+                        <p-inputmask  id="phone" formControlName="phone" mask="9-999-999-9999" slotChar="" [autoClear]="false"/>
                         <label for="phone">Phone Number</label>
                     </p-floatLabel>
                     <small class="p-error" *ngIf="f['phone'].invalid && f['phone'].touched">
