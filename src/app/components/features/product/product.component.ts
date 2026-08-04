@@ -7,6 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { CartService } from '../../../services/cart.service';
 import { WishlistService } from '../../../services/wishlist.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-product',
@@ -18,6 +19,7 @@ import { WishlistService } from '../../../services/wishlist.service';
 export class ProductComponent {
   private activatedRoute = inject(ActivatedRoute);
   private productService = inject(ProductService);
+  private authService = inject(AuthService);
   wishlistService = inject(WishlistService);
   private router = inject(Router);
   cartService = inject(CartService);
@@ -33,7 +35,8 @@ export class ProductComponent {
 
   cartBtn(p: Product) {
     this.cartService.addItem(p);
-    this.router.navigate(['/cart'])
+    if (this.authService.isLoggedIn$()) this.router.navigate(['/cart']);
+    
   }
 
   wishBtn(p: Product) {

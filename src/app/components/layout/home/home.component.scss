@@ -1,15 +1,18 @@
 .hero-section {
     width: 100%;
-    height: 700px;
+    height: 510px;
     background-color: var(--p-content-background);
+    padding: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 1rem;
 }
 
 .hero-image {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: max;
     display: block;
+    border-radius: 1rem;
 }

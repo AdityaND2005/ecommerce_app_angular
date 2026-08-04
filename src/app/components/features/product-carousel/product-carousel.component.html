@@ -6,18 +6,18 @@
     </div>
 
     <p-carousel [value]="products" [numVisible]="4" [numScroll]="1" [responsiveOptions]="responsiveOptions"
-        [circular]="true" [autoplayInterval]="5000">
+        [circular]="true" [autoplayInterval]="5000" [showIndicators]="false">
 
         <ng-template let-product pTemplate="item">
-            <div class="product-card">
-
+            <div class="product-card" [routerLink]="['/product', product.id]">
                 <div class="image-wrapper">
                     <img [src]="product.image" [alt]="product.title" class="product-image" />
                 </div>
-
+                <button (click)="$event.stopPropagation(); wishBtn(product)" class="wishlist-btn">
+                    <i [class]="wishlistService.isPresent(product) ? 'pi pi-heart-fill' : 'pi pi-heart'"></i>
+                </button>
                 <div class="product-details">
                     <h3 class="product-title" [title]="product.title">{{ product.title }}</h3>
-
                     <div class="product-meta">
                         <span class="product-price">${{ product.price | number:'1.2-2' }}</span>
                         <span class="product-rating">
@@ -25,9 +25,6 @@
                             {{ product.rating.rate }} ({{ product.rating.count }})
                         </span>
                     </div>
-
-                    <p-button label="View Product" icon="pi pi-search" styleClass="view-btn p-button-outlined" (onClick)="goToProduct(product.id)">
-                    </p-button>
                 </div>
 
             </div>

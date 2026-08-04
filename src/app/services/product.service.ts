@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { map } from 'rxjs';
+import { map, shareReplay } from 'rxjs';
 import { API_URL } from '../constants';
 
 export interface Product {
@@ -38,6 +38,7 @@ export class ProductService {
   
   getProductsGroupedByCategory() {
     return this.getProducts().pipe(
+      shareReplay(1),
       map(products => {
         return products.reduce((groupedMap, product) => {
           const slugKey = this.generateSlug(product.category);

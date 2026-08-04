@@ -1,11 +1,10 @@
 .carousel-section {
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   padding: 0 1rem;
 }
 
-// Header Styling
 .category-header {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .category-title {
@@ -24,7 +23,7 @@
 
 // Product Card Styling
 .product-card {
-  margin: 1rem;
+  margin: 1rem 1rem 0;
   border: 1px solid var(--p-content-border-color, #e5e7eb);
   border-radius: 12px;
   background: var(--p-content-background, #ffffff);
@@ -32,7 +31,6 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
-  height: 100%;
 
   &:hover {
     transform: translateY(-4px);
@@ -70,14 +68,14 @@
   font-weight: 600;
   margin: 0 0 1rem 0;
   color: var(--p-text-color, #1f2937);
-  
+
   // Truncates long titles with an ellipsis (...) after 2 lines
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  min-height: 2.75rem; 
+  min-height: 2.75rem;
 }
 
 .product-meta {
@@ -112,10 +110,10 @@
 }
 
 :host-context(.dark) {
-  
+
   .product-card {
     border-color: #374151; // Darker border
-    
+
     &:hover {
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
     }
@@ -123,6 +121,47 @@
 
   .image-wrapper {
     // Keep background white for FakeStore images, but dim the border
-    border-bottom-color: #374151; 
+    border-bottom-color: #374151;
   }
+}
+
+.wishlist-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+ 
+  width: 40px;
+  height: 40px;
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+  padding: 0;
+ 
+  background: var(--p-content-background);
+  color: var(--p-text-color);
+ 
+  border: 1px solid var(--p-content-border-color);
+  border-radius: 50%;
+ 
+  cursor: pointer;
+ 
+  box-shadow: var(--p-overlay-modal-shadow);
+ 
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+ 
+.wishlist-btn:hover {
+  transform: scale(1.1);
+  color: var(--p-primary-color);
+  border-color: var(--p-primary-color);
+}
+
+i.pi-heart-fill {
+    color: red;
 }

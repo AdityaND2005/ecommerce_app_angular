@@ -1,18 +1,16 @@
 .product-view-wrapper {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   min-height: 100vh;
 }
 
-.nav-actions {
-  margin-bottom: 2rem;
-}
-
 .product-container {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 2rem;
+  /* Reduced gap slightly */
   background: var(--p-content-background, #ffffff);
   border-radius: 16px;
   padding: 2rem;
@@ -21,7 +19,8 @@
 
   @media (min-width: 992px) {
     flex-direction: row;
-    padding: 3rem;
+    padding: 2.5rem;
+    /* Reduced padding slightly to save space */
   }
 }
 
@@ -34,10 +33,13 @@
 }
 
 .main-image-wrapper {
+  position: relative;
   width: 100%;
-  max-width: 450px;
+  max-width: 350px;
+  /* Reduced from 450px to make image smaller */
   background-color: #ffffff;
-  padding: 2rem;
+  padding: 1.5rem;
+  /* Reduced padding */
   border-radius: 12px;
   border: 1px solid var(--p-content-border-color, #e5e7eb);
 }
@@ -46,7 +48,8 @@
   width: 100%;
   height: auto;
   object-fit: contain;
-  max-height: 500px;
+  max-height: 350px;
+  /* Reduced from 500px to prevent excessive scrolling */
 }
 
 // Right Side
@@ -71,30 +74,82 @@
   color: var(--p-text-color, #1f2937);
 }
 
+// New Layout Row: Rating & Price (Left), Buttons (Right)
+.meta-action-row {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--p-content-border-color, #e5e7eb);
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    /* Aligns price and buttons nicely horizontally */
+  }
+}
+
+.meta-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
 .rating-badge {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 2rem;
-  
-  .star-icon { color: #f59e0b; font-size: 1.2rem; }
-  .rate { font-weight: 700; font-size: 1.1rem; color: var(--p-text-color, #1f2937); }
-  .count { color: var(--p-text-muted-color, #6b7280); }
+
+  .star-icon {
+    color: #f59e0b;
+    font-size: 1.2rem;
+  }
+
+  .rate {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--p-text-color, #1f2937);
+  }
+
+  .count {
+    color: var(--p-text-muted-color, #6b7280);
+  }
 }
 
 .price-section {
-  margin-bottom: 2rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--p-content-border-color, #e5e7eb);
   width: 100%;
-  
+
   .price {
     font-size: 2.5rem;
     font-weight: 800;
     color: var(--p-primary-color, #3b82f6);
+    line-height: 1;
   }
 }
 
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  justify-content: flex-end;
+
+  @media (min-width: 768px) {
+    width: auto;
+  }
+
+  ::ng-deep .cart-btn {
+    font-weight: 700;
+  }
+
+  ::ng-deep .wishlist-btn {
+    width: 60px;
+  }
+}
+
+// Description Section
 .description-section {
   margin-bottom: 3rem;
 
@@ -112,21 +167,6 @@
   }
 }
 
-.action-buttons {
-  display: flex;
-  gap: 1rem;
-  width: 100%;
-
-  ::ng-deep .cart-btn {
-    flex: 1;
-    font-weight: 700;
-  }
-
-  ::ng-deep .wishlist-btn {
-    width: 60px;
-  }
-}
-
 .loading-state {
   display: flex;
   flex-direction: column;
@@ -134,15 +174,119 @@
   justify-content: center;
   min-height: 50vh;
   color: var(--p-text-muted-color, #6b7280);
-  
-  p { margin-top: 1rem; font-weight: 500; font-size: 1.25rem; }
+
+  p {
+    margin-top: 1rem;
+    font-weight: 500;
+    font-size: 1.25rem;
+  }
 }
 
+// Dark Mode Support
 :host-context(.dark) {
   .product-container {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
     border-color: #374151;
   }
-  .main-image-wrapper { border-color: #374151; }
-  .price-section { border-bottom-color: #374151; }
+
+  .image-back-btn {
+    background-color: #374151;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      background-color: #4b5563;
+    }
+  }
+
+  .main-image-wrapper {
+    border-color: #374151;
+  }
+
+  .meta-action-row {
+    border-bottom-color: #374151;
+  }
+}
+
+:host ::ng-deep .wishlist-btn .pi-heart-fill {
+  color: red !important;
+}
+
+.image-back-btn {
+  position: absolute; 
+  top: 1.5rem;        
+  left: 1.5rem;      
+  
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  z-index: 10;   
+  
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: var(--p-text-color, #1f2937);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--p-surface-100, #f3f4f6);
+    transform: scale(1.05);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.wishlist-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+ 
+  width: 40px;
+  height: 40px;
+  
+  opacity: 0;
+  visibility: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+  padding: 0;
+ 
+  background: var(--p-content-background);
+  color: var(--p-text-color);
+ 
+  border: 1px solid var(--p-content-border-color);
+  border-radius: 50%;
+ 
+  cursor: pointer;
+ 
+  box-shadow: var(--p-overlay-modal-shadow);
+ 
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    visibility 0.2s ease;
+}
+ 
+.wishlist-btn:hover {
+  transform: scale(1.1);
+  color: var(--p-primary-color);
+  border-color: var(--p-primary-color);
+}
+
+.main-image-wrapper:hover .wishlist-btn {
+  opacity: 1;
+  visibility: visible;
 }

@@ -13,6 +13,16 @@ export class AuthService {
   token = signal<string>('');
   isLoggedIn$ = computed(() => this.token() ? true : false);
 
+  loginDialogVisible = signal(false);
+
+  openLoginDialog() {
+    this.loginDialogVisible.set(true);
+  }
+
+  closeLoginDialog() {
+    this.loginDialogVisible.set(false);
+  }
+
   signup(data: any) {
     const payload = {
       email: data.email,

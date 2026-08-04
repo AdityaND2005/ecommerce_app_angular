@@ -1,10 +1,10 @@
-<app-login [(visible)]="showLoginDialog"></app-login>
+<app-login [(visible)]="authService.loginDialogVisible"></app-login>
 
 <div class="nav-container" >
-    <p-menubar [model]="navItems()">
+    <p-menubar [model]="navItems()" [autoDisplay]="true" [autoHide]="true" [autoHideDelay]="100">
 
         <ng-template pTemplate="start">
-            <div class="logo-container">
+            <div class="logo-container" routerLink="\">
                 <img src="/logo.png" alt="Store Logo" class="logo-image" />
             </div>
         </ng-template>
@@ -24,7 +24,7 @@
                 </p-button>
                 
                 @if (!isLoggedIn()) {
-                <p-button label="Login" icon="pi pi-sign-in" size="small" (click)="openLogin()" />
+                <p-button label="Login" icon="pi pi-sign-in" size="small" (click)="authService.openLoginDialog()" />
                 } @else {
                 <div class="user-profile" (click)="userMenu.toggle($event)">
                     <i class="pi pi-bars hamburger-icon"></i>

@@ -1,5 +1,6 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { Product } from './product.service';
+import { AuthService } from './auth.service';
 
 export interface CartItem extends Product {
   count: number;
@@ -14,6 +15,7 @@ export interface Cart {
   providedIn: 'root'
 })
 export class CartService {
+  authService = inject(AuthService);
 
   cart = signal<Cart>({});
   totalPrice = computed(() =>
@@ -24,6 +26,10 @@ export class CartService {
   );
 
   addItem(product: Product) {
+    if (!this.authService.isLoggedIn$()) {
+      this.authService.openLoginDialog()
+      return;
+    }
     this.cart.update(cart => {
       const products = cart.products ?? [];
       const exist = products.find(item => item.id === product.id);
@@ -37,6 +43,10 @@ export class CartService {
   }
 
   removeItem(id: number) {
+    if (!this.authService.isLoggedIn$()) {
+      this.authService.openLoginDialog()
+      return;
+    }
     this.cart.update(cart => {
       const products = cart.products ?? [];
       const updatedProducts = products.map(item => item.id === id ? { ...item, count: item.count - 1 } : item).filter(item => item.count > 0);
@@ -49,6 +59,10 @@ export class CartService {
   }
 
   deleteItem(id: number) {
+    if (!this.authService.isLoggedIn$()) {
+      this.authService.openLoginDialog()
+      return;
+    }
     this.cart.update(cart => {
       const products = cart.products ?? [];
       const updatedProducts = products.filter(item => item.id !== id);

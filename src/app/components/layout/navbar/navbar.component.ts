@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { DOCUMENT } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { LoginComponent } from '../../features/login/login.component';
 import { AuthService } from '../../../services/auth.service';
 import { ProductService } from '../../../services/product.service';
@@ -20,19 +20,18 @@ import { ProductService } from '../../../services/product.service';
   standalone: true,
   imports: [CommonModule, MenubarModule,
     InputTextModule, ButtonModule, AvatarModule, MenuModule,
-    BadgeModule, InputGroupAddonModule, InputGroupModule, RouterModule, LoginComponent],
+    BadgeModule, InputGroupAddonModule, InputGroupModule, RouterModule, LoginComponent, RouterLink],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {
   private document = inject(DOCUMENT);
-  private authService = inject(AuthService);
+  authService = inject(AuthService);
   private productService = inject(ProductService);
   isLoggedIn = this.authService.isLoggedIn$;
   isDarkMode = signal<boolean>(false);
   navItems = signal<MenuItem[]>([]);
   userMenuItems = signal<MenuItem[]>([]);
-  showLoginDialog: boolean = false;
   categories!: string[];
 
 
@@ -42,19 +41,36 @@ export class NavbarComponent implements OnInit {
       this.navItems.set([
         {
           label: 'Home',
+          icon: 'pi pi-home',
           routerLink: ['/home']
         },
         {
           label: 'Categories',
+          icon: 'pi pi-bars',
           badge: res.length.toString(),
           items: res.map(category => ({
             label: category.replace(
               /\w\S*/g,
               word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
             ),
-            routerLink: ['/category', this.productService.generateSlug(category)]
+            items: [
+              {
+                label: 'All',
+                routerLink: ['/category', this.productService.generateSlug(category)]
+              }
+            ]
           }))
-        }
+        },
+        {
+          label: 'Cart',
+          icon: 'pi pi-shopping-cart',
+          routerLink: ['/cart']
+        },
+        {
+          label: 'Wishlist',
+          icon: 'pi pi-heart',
+          routerLink: ['/wishlist']
+        },
       ]);
     })
 
@@ -83,10 +99,6 @@ export class NavbarComponent implements OnInit {
         command: () => this.logout()
       }
     ]);
-  }
-
-  openLogin() {
-    this.showLoginDialog = true;
   }
 
   logout() {

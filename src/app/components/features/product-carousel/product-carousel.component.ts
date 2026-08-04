@@ -1,22 +1,23 @@
 import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarouselModule } from 'primeng/carousel';
-import { ButtonModule } from 'primeng/button';
 import { Product } from '../../../services/product.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { WishlistService } from '../../../services/wishlist.service';
 
 
 @Component({
   selector: 'app-product-carousel',
   standalone: true,
-  imports: [CommonModule, CarouselModule, ButtonModule],
+  imports: [CommonModule, CarouselModule, RouterLink, ButtonModule],
   templateUrl: './product-carousel.component.html',
   styleUrl: './product-carousel.component.scss'
 })
 export class ProductCarouselComponent {
   @Input({ required: true }) categoryName!: string;
   @Input({ required: true }) products: Product[] = [];
-  private router = inject(Router);
+  wishlistService = inject(WishlistService);
 
   responsiveOptions = [
     { breakpoint: '1400px', numVisible: 3, numScroll: 1 },
@@ -32,7 +33,8 @@ export class ProductCarouselComponent {
       .join(' ');
   }
 
-  goToProduct(productId: number) {
-    this.router.navigate(['/product', productId]);
+  wishBtn(p: Product) {
+    const isPresent = this.wishlistService.isPresent(p);
+    isPresent ? this.wishlistService.deleteItem(p.id) : this.wishlistService.addItem(p);
   }
 }

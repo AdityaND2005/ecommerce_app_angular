@@ -1,16 +1,15 @@
 <div class="product-view-wrapper">
-
-  <div class="nav-actions">
-    <p-button label="Back" icon="pi pi-arrow-left" [text]="true" severity="secondary" (onClick)="goBack()">
-    </p-button>
-  </div>
-
   @if (product | async; as p) {
   <div class="product-container">
-
+    <button class="image-back-btn" (click)="goBack()">
+      <i class="pi pi-arrow-left"></i>
+    </button>
     <div class="product-gallery">
       <div class="main-image-wrapper">
         <img [src]="p.image" [alt]="p.title" class="main-image" />
+        <button (click)="wishBtn(p)" class="wishlist-btn">
+          <i [class]="wishlistService.isPresent(p) ? 'pi pi-heart-fill' : 'pi pi-heart'"></i>
+        </button>
       </div>
     </div>
 
@@ -19,28 +18,31 @@
 
       <h1 class="product-title">{{ p.title }}</h1>
 
-      <div class="rating-badge">
-        <i class="pi pi-star-fill star-icon"></i>
-        <span class="rate">{{ p.rating.rate }}</span>
-        <span class="count">({{ p.rating.count }} reviews)</span>
-      </div>
+      <div class="meta-action-row">
 
-      <div class="price-section">
-        <span class="price">{{ p.price | currency }}</span>
+        <div class="meta-info">
+          <div class="rating-badge">
+            <i class="pi pi-star-fill star-icon"></i>
+            <span class="rate">{{ p.rating.rate }}</span>
+            <span class="count">({{ p.rating.count }} reviews)</span>
+          </div>
+
+          <div class="price-section">
+            <span class="price">{{ p.price | currency }}</span>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <p-button label="Add to Cart" icon="pi pi-shopping-cart" styleClass="cart-btn" size="large"
+            (onClick)="cartBtn(p)">
+          </p-button>
+        </div>
+
       </div>
 
       <div class="description-section">
         <h3>About this item</h3>
         <p>{{ p.description }}</p>
-      </div>
-
-      <div class="action-buttons">
-        <p-button label="Add to Cart" icon="pi pi-shopping-cart" styleClass="cart-btn" size="large"
-          (onClick)="cartBtn(p)">
-        </p-button>
-        <p-button [icon]="wishlistService.isPresent(p) ? 'pi pi-heart-fill' : 'pi pi-heart'" styleClass="wishlist-btn" [outlined]="true" severity="secondary" size="large"
-        (onClick)="wishBtn(p)">
-        </p-button>
       </div>
     </div>
 
@@ -51,5 +53,4 @@
     <p>Loading product details...</p>
   </div>
   }
-
 </div>
