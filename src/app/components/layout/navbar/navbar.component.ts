@@ -14,13 +14,14 @@ import { RouterLink, RouterModule } from '@angular/router';
 import { LoginComponent } from '../../features/login/login.component';
 import { AuthService } from '../../../services/auth.service';
 import { ProductService } from '../../../services/product.service';
+import { OverlayBadgeModule } from 'primeng/overlaybadge';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [CommonModule, MenubarModule,
     InputTextModule, ButtonModule, AvatarModule, MenuModule,
-    BadgeModule, InputGroupAddonModule, InputGroupModule, RouterModule, LoginComponent, RouterLink],
+    BadgeModule, InputGroupAddonModule, InputGroupModule, RouterModule, LoginComponent, RouterLink, OverlayBadgeModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })

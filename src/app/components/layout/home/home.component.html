@@ -1,8 +1,14 @@
 <div class="home-container">
 
-    <section class="hero-section">
-        <img src="/hero-banner.png" alt="hero-banner" class="hero-image" />
-    </section>
+    <p-carousel [value]="images" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="5000"
+        [showIndicators]="false">
+        <ng-template let-image #item>
+            <section class="hero-section">
+                <img [src]="image" alt="hero-banner" class="hero-image" />
+            </section>
+        </ng-template>
+    </p-carousel>
+
 
     @for (category of productMap | keyvalue; track category.key) {
     <app-product-carousel [categoryName]="category.key" [products]="category.value">
